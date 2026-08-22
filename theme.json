@@ -1,0 +1,36 @@
+{
+  "$schema": "https://codedrobe.app/schemas/theme-manifest.schema.json",
+  "schemaVersion": 1,
+  "id": "xinjiang-sayram-tianshan",
+  "displayName": "赛里木湖 · 天山清晨",
+  "version": "1.1.4",
+  "copy": {
+    "brandTitle": "赛里木湖",
+    "brandSubtitle": "天山清晨 · 安静工作",
+    "signature": "clear mind / slow work",
+    "tagline": "湖面给工作留一点呼吸",
+    "ribbon": "✦"
+  },
+  "catalog": {
+    "name": {
+      "zh": "赛里木湖 · 天山清晨",
+      "en": "Sayram Lake · Tianshan Morning"
+    },
+    "description": {
+      "zh": "一套以新疆赛里木湖与天山清晨为灵感的 Codex Desktop 全界面主题：风光背景、湖蓝文字、深 teal 导航、暖金交互和可读的静态界面表面。",
+      "en": "A full Codex Desktop theme inspired by Sayram Lake and the Tianshan at dawn, combining one landscape, lake-blue text, deep-teal navigation, wheat-gold interactions, and readable static surfaces."
+    },
+    "categories": ["nature", "calm", "landscape"]
+  },
+  "images": {
+    "hero": "assets/sayram-lake-tianshan.png"
+  },
+  "targets": {
+    "codex": {
+      "css": "theme.css",
+      "options": {
+        "rendererProfile": "codex-theme-v1"
+      }
+    }
+  }
+}

@@ -1,0 +1,985 @@
+/*
+ * 赛里木湖 · 天山清晨 · Static edition
+ *
+ * Renderer-only visual layer.  The photograph is a single fixed background;
+ * readable UI surfaces are intentionally opaque or nearly opaque.  There is
+ * no backdrop-filter, CSS filter, animation, universal descendant styling, or
+ * broad transparent overlay in this edition.
+ */
+
+:root.codedrobe-codex-skin {
+  color-scheme: light;
+
+  --xinjiang-ink: #163b4b;
+  --xinjiang-deep: #0c3040;
+  --xinjiang-muted: #426477;
+  --xinjiang-faint: #5c7785;
+  --xinjiang-lake: #2c7892;
+  --xinjiang-teal: #174e61;
+  --xinjiang-teal-soft: rgba(21, 77, 95, 0.68);
+  --xinjiang-gold: #bd8140;
+  --xinjiang-gold-light: #e0ad64;
+  --xinjiang-green: #198653;
+  --xinjiang-red: #bd4d49;
+  --xinjiang-line: rgba(21, 75, 89, 0.22);
+  --xinjiang-line-soft: rgba(21, 75, 89, 0.14);
+  --xinjiang-surface: rgba(237, 247, 246, 0.92);
+  --xinjiang-surface-strong: rgba(246, 251, 250, 0.97);
+  --xinjiang-surface-soft: rgba(225, 241, 240, 0.84);
+  --xinjiang-surface-dark: rgba(18, 63, 77, 0.86);
+  --xinjiang-shadow: 0 8px 22px rgba(13, 55, 70, 0.14);
+
+  /* Native token families.  These are deliberately high-contrast values. */
+  --color-token-text-primary: var(--xinjiang-ink);
+  --color-token-text-secondary: var(--xinjiang-muted);
+  --color-token-text-tertiary: var(--xinjiang-faint);
+  --color-token-main-surface-primary: var(--xinjiang-surface);
+  --color-token-main-surface-secondary: var(--xinjiang-surface-soft);
+  --color-token-sidebar-surface-primary: var(--xinjiang-teal);
+  --color-token-sidebar-surface-secondary: var(--xinjiang-teal-soft);
+  --color-token-border-medium: var(--xinjiang-line);
+  --color-token-border-light: var(--xinjiang-line-soft);
+  --color-token-accent: var(--xinjiang-gold);
+  --theme-surface: var(--xinjiang-surface);
+  --theme-surface-secondary: var(--xinjiang-surface-soft);
+  --theme-text: var(--xinjiang-ink);
+  --theme-text-secondary: var(--xinjiang-muted);
+  --theme-border: var(--xinjiang-line);
+  --theme-accent: var(--xinjiang-gold);
+}
+
+/* ---------- One clear landscape layer ---------- */
+
+html.codedrobe-codex-skin,
+html.codedrobe-codex-skin body {
+  min-height: 100%;
+  background: #a9cdd8 !important;
+  color: var(--xinjiang-ink) !important;
+}
+
+html.codedrobe-codex-skin body {
+  position: relative;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    "Microsoft YaHei UI", sans-serif !important;
+}
+
+html.codedrobe-codex-skin body::before {
+  content: "";
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--dream-art);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+html.codedrobe-codex-skin body::after {
+  content: none;
+}
+
+html.codedrobe-codex-skin #root {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  background: transparent !important;
+  color: var(--xinjiang-ink) !important;
+}
+
+html.codedrobe-codex-skin #root > div {
+  background: transparent !important;
+}
+
+/* CodeDrobe's verification node is not part of the native UI. */
+html.codedrobe-codex-skin #codedrobe-codex-skin-chrome {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ---------- Stable app surfaces ---------- */
+
+html.codedrobe-codex-skin [class*="_ApplicationMenuTopBar_"] {
+  position: relative;
+  z-index: 4;
+  background: rgba(229, 243, 244, 0.95) !important;
+  border-bottom: 1px solid var(--xinjiang-line) !important;
+  box-shadow: 0 2px 8px rgba(13, 55, 70, 0.10) !important;
+  color: var(--xinjiang-deep) !important;
+}
+
+html.codedrobe-codex-skin [class*="_ApplicationMenuTopBar_"]
+  :where(button, a, span) {
+  color: var(--xinjiang-deep) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html.codedrobe-codex-skin [class*="_ApplicationMenuTopBar_"]
+  :where(button, a):hover {
+  background: rgba(255, 255, 255, 0.58) !important;
+  color: var(--xinjiang-lake) !important;
+}
+
+html.codedrobe-codex-skin aside.app-shell-left-panel {
+  position: relative;
+  z-index: 3;
+  color: #f4fbf9 !important;
+  background:
+    linear-gradient(rgba(17, 72, 87, 0.72), rgba(17, 72, 87, 0.72)),
+    var(--dream-art) center / cover no-repeat !important;
+  border-right: 1px solid rgba(229, 247, 243, 0.35) !important;
+  box-shadow: 4px 0 14px rgba(8, 42, 54, 0.13) !important;
+}
+
+html.codedrobe-codex-skin aside.app-shell-left-panel
+  :where(a, button, [role="button"], h1, h2, h3, h4, h5, h6, p, span, label) {
+  color: #f4fbf9 !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html.codedrobe-codex-skin aside.app-shell-left-panel
+  :where(a, button, [role="button"]) {
+  background: transparent !important;
+  border-color: transparent !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  text-shadow: 0 1px 2px rgba(6, 35, 47, 0.58) !important;
+}
+
+html.codedrobe-codex-skin aside.app-shell-left-panel
+  :where(a, button, [role="button"]):hover {
+  background: rgba(234, 248, 244, 0.17) !important;
+  color: #ffffff !important;
+}
+
+html.codedrobe-codex-skin aside.app-shell-left-panel
+  :where([aria-current="page"], [data-state="active"], [aria-selected="true"]) {
+  background: rgba(221, 174, 100, 0.36) !important;
+  box-shadow: inset 3px 0 0 var(--xinjiang-gold-light) !important;
+  color: #ffffff !important;
+}
+
+html.codedrobe-codex-skin aside.app-shell-left-panel :where(svg, path) {
+  color: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* The right project/source panel gets one readable light surface. */
+html.codedrobe-codex-skin aside:not(.app-shell-left-panel) {
+  position: relative;
+  z-index: 3;
+  background: var(--xinjiang-surface-strong) !important;
+  border-left: 1px solid var(--xinjiang-line) !important;
+  color: var(--xinjiang-ink) !important;
+}
+
+html.codedrobe-codex-skin aside:not(.app-shell-left-panel)
+  :where(h1, h2, h3, h4, h5, h6, p, span, label, a, button, [role="button"]) {
+  color: var(--xinjiang-ink) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html.codedrobe-codex-skin aside:not(.app-shell-left-panel)
+  :where(a, button, [role="button"]):hover {
+  background: rgba(189, 129, 64, 0.12) !important;
+  color: var(--xinjiang-deep) !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"] {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  color: var(--xinjiang-ink) !important;
+  /* Keep the Sayram Lake artwork as the actual work-area background.
+     Readability is handled by local transcript/composer surfaces below. */
+  background: transparent !important;
+  background-image: none !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.50) !important;
+  box-shadow: none !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="_MainContentViewport_"], [class*="_MainContentFrame_"]) {
+  background: transparent !important;
+}
+
+/* Keep normal main text dark even when native light/dark utility tokens vary. */
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where(h1, h2, h3, h4, h5, h6, p, label, li, button, [role="button"]) {
+  color: var(--xinjiang-ink) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="text-secondary"], [class*="text-tertiary"],
+    [class*="text-muted"], [class*="text-subtle"]) {
+  color: var(--xinjiang-muted) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="text-white"], [class*="text-inverse"],
+    [class*="text-on-"], [class*="text-primary-inverse"]) {
+  color: var(--xinjiang-ink) !important;
+  -webkit-text-fill-color: currentColor !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where(a, a:visited) {
+  color: #1d6680 !important;
+  text-decoration-color: rgba(29, 102, 128, 0.44) !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where(a:hover) {
+  color: #8b5726 !important;
+  text-decoration-color: rgba(139, 87, 38, 0.60) !important;
+}
+
+/* Links and generated-file targets need a visual role of their own.  Keep
+   this rule narrow so ordinary text retains the ink color, while anchors,
+   explicit link roles, and Codex activity file targets remain findable in
+   screenshots and long-running transcripts. */
+html.codedrobe-codex-skin #root main[class*="_MainContentSurface_"]
+  a,
+html.codedrobe-codex-skin #root main[class*="_MainContentSurface_"]
+  [role="link"],
+html.codedrobe-codex-skin #root main[class*="_MainContentSurface_"]
+  [data-agent-activity-file-link] {
+  color: #0066cc !important;
+  -webkit-text-fill-color: #0066cc !important;
+  text-decoration-line: underline !important;
+  text-decoration-color: rgba(0, 102, 204, 0.74) !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 2px !important;
+  font-weight: 600 !important;
+}
+
+html.codedrobe-codex-skin #root main[class*="_MainContentSurface_"]
+  a:hover,
+html.codedrobe-codex-skin #root main[class*="_MainContentSurface_"]
+  [role="link"]:hover,
+html.codedrobe-codex-skin #root main[class*="_MainContentSurface_"]
+  [data-agent-activity-file-link]:hover {
+  color: #004a82 !important;
+  -webkit-text-fill-color: #004a82 !important;
+  text-decoration-color: rgba(0, 74, 130, 0.86) !important;
+}
+
+/* Codex renders generated files and table mentions as role=button spans,
+   not anchors.  Color the text itself; the surrounding focus-ring wrapper
+   can stretch to a full table cell, so a background/border on that wrapper
+   creates a large empty box around a short filename. */
+html.codedrobe-codex-skin #root main[class*="_MainContentSurface_"]
+  [class*="_TableCellFileLink_"] {
+  color: #005fa8 !important;
+  -webkit-text-fill-color: #005fa8 !important;
+  font-weight: 600 !important;
+  text-decoration-line: underline !important;
+  text-decoration-color: rgba(0, 95, 168, 0.68) !important;
+  text-decoration-thickness: 1.5px !important;
+  text-underline-offset: 2px !important;
+}
+
+html.codedrobe-codex-skin #root main[class*="_MainContentSurface_"]
+  [class*="_InlineMentionFocusRing_"][role="button"] {
+  color: #005fa8 !important;
+  -webkit-text-fill-color: #005fa8 !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+
+html.codedrobe-codex-skin #root main[class*="_MainContentSurface_"]
+  [class*="_TableCellFileLink_"]:hover {
+  color: #004a82 !important;
+  -webkit-text-fill-color: #004a82 !important;
+  text-decoration-color: rgba(0, 74, 130, 0.86) !important;
+}
+
+html.codedrobe-codex-skin #root main[class*="_MainContentSurface_"]
+  [class*="_InlineMentionFocusRing_"][role="button"]:hover {
+  color: #004a82 !important;
+  -webkit-text-fill-color: #004a82 !important;
+}
+
+/* Inline commit hashes and file-name code mentions use a neutral pill in
+   the native renderer; keep the same high-visibility blue family. */
+html.codedrobe-codex-skin #root main[class*="_MainContentSurface_"]
+  .inline-markdown[class*="_InlineMarkdown_"] {
+  color: #005fa8 !important;
+  -webkit-text-fill-color: #005fa8 !important;
+  background: rgba(0, 102, 204, 0.14) !important;
+  border: 1px solid rgba(0, 102, 204, 0.30) !important;
+  border-radius: 5px !important;
+  font-weight: 600 !important;
+  padding: 0.12em 0.34em !important;
+}
+
+/* ---------- Transcript: solid enough for every old and new turn ---------- */
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"] [data-turn-key] {
+  background: var(--xinjiang-surface) !important;
+  border: 1px solid var(--xinjiang-line-soft) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(13, 55, 70, 0.06) !important;
+  box-sizing: border-box !important;
+  padding: 22px !important;
+  color: var(--xinjiang-ink) !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [data-turn-key] :where(p, li, h1, h2, h3, h4, h5, h6, span, strong, em, blockquote) {
+  color: var(--xinjiang-ink) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [data-message-author-role="user"] {
+  background: rgba(211, 235, 233, 0.95) !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [data-message-author-role="assistant"] {
+  background: rgba(241, 249, 248, 0.94) !important;
+}
+
+/* Remove the native full-width fade that produced detached white bars. */
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="bg-gradient-to-t"]) {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* Native Codex can add these utilities after the theme is installed.  Keep
+   their surfaces raster-only so a streamed Goal cannot reintroduce a large
+   blur repaint through a late-mounted composer or status chip. */
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="_ComposerLayoutRoot_"], [class*="backdrop-blur"]) {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
+}
+
+/* Semantic separators remain one quiet teal pixel; decorative bars do not. */
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where(hr, [role="separator"][aria-orientation="horizontal"]) {
+  height: 1px !important;
+  min-height: 1px !important;
+  border: 0 !important;
+  background: var(--xinjiang-line-soft) !important;
+  box-shadow: none !important;
+}
+
+/* ---------- Composer ---------- */
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [class*="_ComposerLayoutRoot_"] {
+  position: relative;
+  z-index: 5;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="_ComposerLayoutBody_"], [class*="_ComposerLayoutFooter_"]) {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Keep the native typing surface.  The only intentional change here is
+   extra breathing room around the editable text. */
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [class*="_RichTextInput_"] {
+  padding: 9px 14px !important;
+}
+
+/* The global accessible focus treatment is useful for buttons, but the
+   native editor already owns its caret state.  Do not draw the gold focus
+   rectangle around the typing surface. */
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [class*="_RichTextInput_"]
+  :where(.ProseMirror.ProseMirror-focused,
+    .ProseMirror:focus,
+    .ProseMirror:focus-visible,
+    [contenteditable="true"]:focus,
+    [contenteditable="true"]:focus-visible) {
+  outline: none !important;
+  outline-offset: 0 !important;
+  box-shadow: none !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [class*="_ComposerLayoutRoot_"] :where(button, [role="button"]) {
+  color: var(--xinjiang-ink) !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [class*="_ComposerLayoutRoot_"] :where(button, [role="button"]):hover {
+  color: #7b4c22 !important;
+  background: rgba(189, 129, 64, 0.16) !important;
+  border-color: rgba(189, 129, 64, 0.26) !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [class*="_ComposerLayoutRoot_"]
+  :where(button[type="submit"], [data-testid*="send"], [aria-label*="send" i]) {
+  color: #fffaf0 !important;
+  background: var(--xinjiang-gold) !important;
+  border: 1px solid rgba(117, 71, 30, 0.30) !important;
+  box-shadow: 0 4px 10px rgba(129, 78, 29, 0.20) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+/* ---------- Menus, dialogs, pickers, project panels ---------- */
+
+html.codedrobe-codex-skin
+  :where([role="dialog"], [role="menu"], [role="listbox"]) {
+  background: var(--xinjiang-surface-strong) !important;
+  background-image: none !important;
+  border: 1px solid var(--xinjiang-line) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--xinjiang-shadow) !important;
+  color: var(--xinjiang-ink) !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin
+  :where([class*="PopoverContent"], [class*="popover-content"]) {
+  background: var(--xinjiang-surface-strong) !important;
+  background-image: none !important;
+  border: 1px solid var(--xinjiang-line) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--xinjiang-shadow) !important;
+  color: var(--xinjiang-ink) !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin
+  :where([role="dialog"], [role="menu"], [role="listbox"])
+  :where(button, [role="menuitem"], [role="option"], label, span, p) {
+  color: var(--xinjiang-ink) !important;
+  -webkit-text-fill-color: currentColor !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin
+  :where([class*="PopoverContent"], [class*="popover-content"])
+  :where(button, [role="menuitem"], [role="option"], label, span, p) {
+  color: var(--xinjiang-ink) !important;
+  -webkit-text-fill-color: currentColor !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin
+  :where([role="menuitem"], [role="option"], [role="dialog"] button,
+    [role="listbox"] button):hover {
+  background: rgba(189, 129, 64, 0.16) !important;
+  color: var(--xinjiang-deep) !important;
+}
+
+html.codedrobe-codex-skin [class*="_ComposerTopMenuShell_"] {
+  z-index: 80 !important;
+}
+
+html.codedrobe-codex-skin [class*="_ComposerTopMenuShell_"]
+  :where([class*="bg-surface-elevated-secondary"]) {
+  position: relative;
+  isolation: isolate;
+  background: var(--xinjiang-surface-strong) !important;
+  background-color: var(--xinjiang-surface-strong) !important;
+  background-image: none !important;
+  border: 1px solid var(--xinjiang-line) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--xinjiang-shadow) !important;
+  color: var(--xinjiang-ink) !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin [class*="_ComposerTopMenuShell_"]
+  :where(button, [role="button"]) {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: var(--xinjiang-ink) !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html.codedrobe-codex-skin [class*="_ComposerTopMenuShell_"]
+  :where(button:hover, button:focus-visible, [role="button"]:hover,
+    [role="button"]:focus-visible) {
+  background: rgba(189, 129, 64, 0.18) !important;
+  border-color: rgba(189, 129, 64, 0.28) !important;
+  box-shadow: inset 3px 0 0 var(--xinjiang-gold) !important;
+  color: var(--xinjiang-deep) !important;
+}
+
+html.codedrobe-codex-skin [class*="_ComposerTopMenuShell_"]
+  :where(svg, path) {
+  color: var(--xinjiang-deep) !important;
+  stroke: currentColor !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin [class*="_ComposerTopMenuShell_"]
+  :where([class*="text-secondary"], [class*="text-tertiary"],
+    .text-codex-description) {
+  color: var(--xinjiang-muted) !important;
+  -webkit-text-fill-color: currentColor !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin [class*="_ComposerTopMenuShell_"]
+  :where([class*="text-muted"], [class*="text-subtle"]) {
+  color: var(--xinjiang-muted) !important;
+  -webkit-text-fill-color: currentColor !important;
+  opacity: 1 !important;
+}
+
+/* ---------- Running state, Thinking, dates, and goal labels ---------- */
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="group/activity-header"], [aria-busy="true"],
+    [data-state="loading"]) {
+  background-color: rgba(239, 248, 247, 0.95) !important;
+  background-image: none !important;
+  border: 1px solid var(--xinjiang-line-soft) !important;
+  border-radius: 10px !important;
+  color: var(--xinjiang-deep) !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="bg-background-primary-soft"],
+    [class*="loading-shimmer-pure-text"]) {
+  background-color: rgba(239, 248, 247, 0.95) !important;
+  background-image: none !important;
+  color: var(--xinjiang-deep) !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="activity-header"] *) {
+  color: var(--xinjiang-deep) !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="bg-background-primary-soft"] *,
+    [class*="loading-shimmer-pure-text"] *) {
+  color: var(--xinjiang-deep) !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="thinking" i], [class*="working" i],
+    [class*="loading" i]) {
+  color: var(--xinjiang-deep) !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="shimmer" i], [class*="timestamp" i],
+    [class*="date" i], time, [datetime]) {
+  color: var(--xinjiang-deep) !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([aria-label*="thinking" i], [aria-label*="working" i],
+    [aria-label*="loading" i]) {
+  color: var(--xinjiang-deep) !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([data-testid*="thinking" i], [data-testid*="status" i]) {
+  color: var(--xinjiang-deep) !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* Native shimmer utilities use important text tokens.  Match their stable
+   utility prefixes directly so Thinking/working copy cannot remain white. */
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [class*="loading-shimmer-pure-text"] {
+  color: var(--xinjiang-deep) !important;
+  -webkit-text-fill-color: currentColor !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [class*="_cadencedShimmerSweep_"] {
+  color: var(--xinjiang-deep) !important;
+  -webkit-text-fill-color: currentColor !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [class*="_cadencedShimmerHighlight_"] {
+  color: var(--xinjiang-deep) !important;
+  -webkit-text-fill-color: currentColor !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [class*="text-text/"] {
+  color: var(--xinjiang-deep) !important;
+  -webkit-text-fill-color: currentColor !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin #root
+  main[class*="_MainContentSurface_"]
+  [class*="text-text/"]
+  [class*="_cadencedShimmerHighlight_"] {
+  color: var(--xinjiang-deep) !important;
+  -webkit-text-fill-color: var(--xinjiang-deep) !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin #root
+  main[class*="_MainContentSurface_"]
+  [class*="text-text/"]
+  [class*="_cadencedShimmerSweep_"] {
+  color: var(--xinjiang-deep) !important;
+  -webkit-text-fill-color: var(--xinjiang-deep) !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin #root
+  main[class*="_MainContentSurface_"]
+  [class*="group/activity-header"]
+  [class*="text-text/"] {
+  color: var(--xinjiang-deep) !important;
+  -webkit-text-fill-color: var(--xinjiang-deep) !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin #root
+  main[class*="_MainContentSurface_"]
+  [class*="group/activity-header"]
+  [class*="text-text/"] * {
+  color: var(--xinjiang-deep) !important;
+  -webkit-text-fill-color: var(--xinjiang-deep) !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="activity-header"] svg,
+    [class*="activity-header"] path) {
+  color: var(--xinjiang-deep) !important;
+  stroke: currentColor !important;
+}
+
+/* Activity rows are compact native controls.  The previous surface rule
+   also matched their nested text wrappers, which produced stacked borders
+   and text pressed against each inner edge.  Keep one breathable outer row
+   and make only the nested wrappers transparent. */
+html.codedrobe-codex-skin #root
+  main[class*="_MainContentSurface_"]
+  [class*="group/activity-header"] {
+  box-sizing: border-box !important;
+  min-height: 40px !important;
+  margin-block: 5px !important;
+  padding: 8px 12px !important;
+  gap: 10px !important;
+  line-height: 1.4 !important;
+}
+
+html.codedrobe-codex-skin #root
+  main[class*="_MainContentSurface_"]
+  [class*="group/activity-header"]
+  [class*="activity-header"] {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+html.codedrobe-codex-skin #root
+  main[class*="_MainContentSurface_"]
+  [class*="group/activity-header"]
+  > [class*="inline-flex"] {
+  gap: 10px !important;
+}
+
+html.codedrobe-codex-skin #root
+  main[class*="_MainContentSurface_"]
+  [class*="group/activity-header"]
+  svg {
+  flex-shrink: 0 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="bg-background-primary-soft"] svg,
+    [class*="bg-background-primary-soft"] path) {
+  color: var(--xinjiang-deep) !important;
+  stroke: currentColor !important;
+}
+
+/* ---------- Diff counters, markdown, code, tables ---------- */
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="turn-diff-header"], [class*="turn-diff-file-row"]) {
+  background: var(--xinjiang-surface-strong) !important;
+  background-image: none !important;
+  border-color: var(--xinjiang-line-soft) !important;
+  color: var(--xinjiang-ink) !important;
+  box-shadow: none !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="turn-diff-header"], [class*="turn-diff-file-row"])
+  :where(span, p, button, [role="button"]) {
+  color: var(--xinjiang-ink) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where(.text-codex-git-added, [class*="git-added"]) {
+  color: var(--xinjiang-green) !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin #root
+  [class*="text-codex-git-added"] {
+  color: var(--xinjiang-green) !important;
+  -webkit-text-fill-color: var(--xinjiang-green) !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where(.text-codex-git-deleted, [class*="git-deleted"]) {
+  color: var(--xinjiang-red) !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin #root
+  [class*="text-codex-git-deleted"] {
+  color: var(--xinjiang-red) !important;
+  -webkit-text-fill-color: var(--xinjiang-red) !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where(code:not(pre code), :not(pre) > code) {
+  background: rgba(201, 229, 229, 0.90) !important;
+  border: 1px solid rgba(35, 101, 119, 0.20) !important;
+  border-radius: 5px !important;
+  color: #14566d !important;
+  padding: 0.12em 0.34em !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where(pre, code.hljs) {
+  background: #123746 !important;
+  border: 1px solid rgba(184, 222, 225, 0.28) !important;
+  border-radius: 10px !important;
+  color: #eaf6f2 !important;
+  text-shadow: none !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"] pre code {
+  border: 0 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where(.hljs-comment, .token.comment, .token.prolog, .token.doctype) {
+  color: #a9c7c8 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where(.hljs-keyword, .hljs-literal, .token.keyword, .token.boolean) {
+  color: #9edbdd !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where(.hljs-string, .token.string, .token.attr-value) {
+  color: #f0cc82 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where(.hljs-number, .token.number, .token.constant) {
+  color: #f0a77f !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"] blockquote {
+  border-left-color: var(--xinjiang-gold) !important;
+  color: var(--xinjiang-muted) !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"] th {
+  background: rgba(198, 226, 229, 0.90) !important;
+  color: var(--xinjiang-deep) !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"] td {
+  background: rgba(247, 251, 250, 0.90) !important;
+  border-color: var(--xinjiang-line-soft) !important;
+  color: var(--xinjiang-ink) !important;
+}
+
+/* ---------- Source/research panel and settings chart ---------- */
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [class*="bg-surface-elevated-secondary"].rounded-3xl {
+  background: var(--xinjiang-surface-strong) !important;
+  background-image: none !important;
+  border: 1px solid var(--xinjiang-line) !important;
+  box-shadow: var(--xinjiang-shadow) !important;
+  color: var(--xinjiang-ink) !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [class*="bg-surface-elevated-secondary"][class*="max-h-full"] {
+  background: var(--xinjiang-surface-strong) !important;
+  background-image: none !important;
+  border: 1px solid var(--xinjiang-line) !important;
+  box-shadow: var(--xinjiang-shadow) !important;
+  color: var(--xinjiang-ink) !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [class*="bg-surface-elevated-secondary"] header::before {
+  display: none !important;
+  content: none !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [class*="bg-surface-elevated-secondary"] section::after {
+  display: none !important;
+  content: none !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  :where([class*="summary-panel-item"]):hover {
+  background: rgba(189, 129, 64, 0.12) !important;
+  color: var(--xinjiang-deep) !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [aria-label="Token usage chart"] {
+  background: var(--xinjiang-surface-strong) !important;
+  border: 1px solid var(--xinjiang-line) !important;
+  border-radius: 8px !important;
+  color: var(--xinjiang-deep) !important;
+}
+
+/* ---------- Focus, disabled states, and modest scrollbars ---------- */
+
+html.codedrobe-codex-skin
+  :where(button, [role="button"], input, textarea, [contenteditable="true"]):focus-visible {
+  outline: 2px solid rgba(189, 129, 64, 0.82) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 3px rgba(189, 129, 64, 0.16) !important;
+}
+
+html.codedrobe-codex-skin
+  :where(button:disabled, [role="button"][aria-disabled="true"]) {
+  color: #6e8791 !important;
+  opacity: 0.78 !important;
+}
+
+html.codedrobe-codex-skin
+  :where([role="tooltip"], [data-radix-tooltip-content]) {
+  background: var(--xinjiang-surface-strong) !important;
+  border: 1px solid var(--xinjiang-line) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--xinjiang-shadow) !important;
+  color: var(--xinjiang-ink) !important;
+  opacity: 1 !important;
+}
+
+html.codedrobe-codex-skin
+  :where([role="tooltip"], [data-radix-tooltip-content])
+  :where(span, div, p) {
+  color: var(--xinjiang-ink) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+/* Some existing-chat reference spans carry text-inherit and a later native
+   text token.  Keep the link treatment at the end of the stylesheet so old
+   turns and newly streamed turns receive the same visible blue affordance. */
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [data-agent-activity-file-link="true"][role="link"],
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [role="link"] {
+  color: #0066cc !important;
+  -webkit-text-fill-color: #0066cc !important;
+  font-weight: 600 !important;
+  text-decoration-line: underline !important;
+  text-decoration-color: rgba(0, 102, 204, 0.74) !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 2px !important;
+}
+
+/* The activity-file span also carries a native group-hover text token with
+   stronger class specificity.  Match that stable data/class combination so
+   its actual painted text (not only its underline) stays blue in old turns. */
+html.codedrobe-codex-skin #root
+  main[class*="_MainContentSurface_"]
+  [data-agent-activity-file-link="true"][role="link"][class*="group-hover/activity-header"] {
+  color: #0066cc !important;
+  -webkit-text-fill-color: #0066cc !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"] {
+  scrollbar-color: rgba(44, 120, 146, 0.50) transparent !important;
+  scrollbar-width: thin !important;
+}
+
+html.codedrobe-codex-skin aside.app-shell-left-panel,
+html.codedrobe-codex-skin aside:not(.app-shell-left-panel) {
+  scrollbar-color: rgba(44, 120, 146, 0.56) transparent !important;
+  scrollbar-width: thin !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]::-webkit-scrollbar,
+html.codedrobe-codex-skin aside::-webkit-scrollbar {
+  width: 9px !important;
+  height: 9px !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]::-webkit-scrollbar-track,
+html.codedrobe-codex-skin aside::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]::-webkit-scrollbar-thumb,
+html.codedrobe-codex-skin aside::-webkit-scrollbar-thumb {
+  background: rgba(44, 120, 146, 0.46) !important;
+  border: 2px solid transparent !important;
+  border-radius: 999px !important;
+  background-clip: padding-box !important;
+}

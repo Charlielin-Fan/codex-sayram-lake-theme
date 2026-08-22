@@ -1,0 +1,15 @@
+# Local operating-system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local diagnostics and generated captures
+*.log
+*.tmp
+*.jsonl
+qa-*.png
+screenshots/
+
+# Node/npm caches if a contributor uses a local CLI install
+node_modules/
+npm-debug.log*

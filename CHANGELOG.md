@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.8
+
+- Added a readable Markdown table treatment with consistent cell padding, subtle grid lines, rounded corners, and distinct header/body surfaces.
+- Kept table overflow scrolling available for wide model-generated tables.
+- Repacked the portable theme package.
+
 ## 1.1.7
 
 - Removed the shared native top fade that rendered as a white horizontal separator on Settings, new chats, and Scheduled tasks.

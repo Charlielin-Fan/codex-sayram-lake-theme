@@ -861,6 +861,48 @@ html.codedrobe-codex-skin main[class*="_MainContentSurface_"] td {
   color: var(--xinjiang-ink) !important;
 }
 
+/* Markdown tables need their own rhythm.  The native renderer can remove the
+   first cell's left padding while expanding the table to the turn edge; keep
+   the table readable without changing paragraph or code-block spacing. */
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"] table {
+  width: 100% !important;
+  border: 1px solid var(--xinjiang-line-soft) !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  background: rgba(247, 251, 250, 0.90) !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  table :where(th, td) {
+  box-sizing: border-box !important;
+  padding: 10px 14px !important;
+  border-right: 1px solid var(--xinjiang-line-soft) !important;
+  border-bottom: 1px solid var(--xinjiang-line-soft) !important;
+  vertical-align: top !important;
+  text-align: left !important;
+  line-height: 1.45 !important;
+  overflow-wrap: anywhere !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  table :where(th, td):last-child {
+  border-right: 0 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  table tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  table thead th {
+  background: rgba(198, 226, 229, 0.92) !important;
+  color: var(--xinjiang-deep) !important;
+  font-weight: 650 !important;
+}
+
 /* ---------- Source/research panel and settings chart ---------- */
 
 html.codedrobe-codex-skin main[class*="_MainContentSurface_"]

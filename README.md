@@ -4,7 +4,7 @@
 
 ![赛里木湖 · 天山清晨](assets/sayram-lake-tianshan.png)
 
-当前发布版本：`1.1.4`
+当前发布版本：`1.1.5`
 
 ## 亮点
 
@@ -157,7 +157,7 @@ A Xinjiang-inspired visual theme for Codex Desktop on Windows. It is more than a
 
 ![Sayram Lake · Tianshan Morning](assets/sayram-lake-tianshan.png)
 
-Current release: `1.1.4`
+Current release: `1.1.5`
 
 ## Highlights
 

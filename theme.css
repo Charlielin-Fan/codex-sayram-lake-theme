@@ -896,6 +896,89 @@ html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
   color: var(--xinjiang-deep) !important;
 }
 
+/* ---------- Settings surfaces and profile activity ---------- */
+
+/* The settings route renders its own native white shell outside the chat
+   surface.  Keep the landscape visible around it, then give the settings
+   content a quiet lake-glass surface so its text remains readable. */
+html.codedrobe-codex-skin
+  main[class*="bg-surface"][class*="no-drag"],
+html.codedrobe-codex-skin
+  webview[class*="bg-surface"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+html.codedrobe-codex-skin
+  [class*="electron:bg-surface"] {
+  background: var(--xinjiang-surface-soft) !important;
+  background-color: var(--xinjiang-surface-soft) !important;
+  background-image: none !important;
+  color: var(--xinjiang-ink) !important;
+}
+
+html.codedrobe-codex-skin nav[aria-label="Settings"] {
+  background: rgba(23, 78, 97, 0.82) !important;
+  color: #f4fbf9 !important;
+  border-right: 1px solid rgba(229, 247, 243, 0.28) !important;
+}
+
+html.codedrobe-codex-skin nav[aria-label="Settings"]
+  :where(button, [role="button"], input, label, span) {
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html.codedrobe-codex-skin nav[aria-label="Settings"]
+  :where([class*="text-tertiary"], [class*="text-secondary"]) {
+  color: rgba(244, 251, 249, 0.82) !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+/* The profile chart is a compact flex column rather than the chat chart's
+   aria-labelled element.  Add breathing room to its single outer frame while
+   keeping the native seven-row grid and month labels unchanged. */
+html.codedrobe-codex-skin
+  main[class*="_MainContentSurface_"]
+  section:has(> div > h2[class*="text-token-text-primary"])
+  > div[class*="flex flex-col gap-2"] {
+  box-sizing: border-box !important;
+  padding: 12px 14px 10px !important;
+  background: var(--xinjiang-surface-strong) !important;
+  background-image: none !important;
+  border: 1px solid var(--xinjiang-line) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 4px 12px rgba(13, 55, 70, 0.08) !important;
+}
+
+/* The global accessible focus treatment remains available elsewhere.  The
+   settings search field keeps its native shape without the theme's gold
+   rectangle; its wrapper receives only a quiet neutral border. */
+html.codedrobe-codex-skin
+  input[placeholder="Search settings…"]:focus,
+html.codedrobe-codex-skin
+  input[placeholder="Search settings…"]:focus-visible {
+  outline: none !important;
+  outline-offset: 0 !important;
+  box-shadow: none !important;
+}
+
+html.codedrobe-codex-skin
+  :where([class*="flex h-8 items-center"]):has(input[placeholder="Search settings…"]) {
+  background: var(--xinjiang-surface) !important;
+  background-color: var(--xinjiang-surface) !important;
+  border-color: var(--xinjiang-line) !important;
+  box-shadow: none !important;
+  color: var(--xinjiang-ink) !important;
+}
+
+html.codedrobe-codex-skin
+  input[placeholder="Search settings…"]::placeholder {
+  color: var(--xinjiang-muted) !important;
+  opacity: 1 !important;
+}
+
 /* ---------- Focus, disabled states, and modest scrollbars ---------- */
 
 html.codedrobe-codex-skin

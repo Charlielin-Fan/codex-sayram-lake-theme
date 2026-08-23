@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.7
+
+- Removed the shared native top fade that rendered as a white horizontal separator on Settings, new chats, and Scheduled tasks.
+- Kept the main surfaces continuous with the Sayram Lake background while preserving the readable settings shell and input surfaces.
+- Repacked the portable theme package.
+
 ## 1.1.6
 
 - Restyled the Scheduled tasks sticky search band so it no longer renders as an opaque white strip over the landscape.

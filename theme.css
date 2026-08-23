@@ -207,6 +207,17 @@ html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
   background: transparent !important;
 }
 
+/* The native renderer reuses this 16px white fade on chat, Settings, and
+   Scheduled tasks.  It reads as a detached horizontal bar over the landscape,
+   so the theme keeps the main surface continuous instead of reintroducing a
+   page-specific white separator. */
+html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
+  [class*="_MainContentTopFade_"] {
+  display: none !important;
+  background: none !important;
+  background-image: none !important;
+}
+
 /* Keep normal main text dark even when native light/dark utility tokens vary. */
 html.codedrobe-codex-skin main[class*="_MainContentSurface_"]
   :where(h1, h2, h3, h4, h5, h6, p, label, li, button, [role="button"]) {
@@ -999,14 +1010,6 @@ html.codedrobe-codex-skin
   display: none !important;
   content: none !important;
   background: none !important;
-}
-
-html.codedrobe-codex-skin
-  main[class*="_MainContentSurface_"]:has(input[placeholder="Search scheduled tasks"])
-  [class*="_MainContentTopFade_"] {
-  display: none !important;
-  background: none !important;
-  background-image: none !important;
 }
 
 html.codedrobe-codex-skin

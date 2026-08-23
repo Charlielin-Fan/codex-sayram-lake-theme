@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.6
+
+- Restyled the Scheduled tasks sticky search band so it no longer renders as an opaque white strip over the landscape.
+- Removed the gold focus rectangle from the Scheduled tasks search field while keeping the native input shape.
+- Removed the Scheduled tasks top fade and search-band pseudo-element so the page no longer shows unexplained white horizontal bars.
+- Recolored the Scheduled tasks Create action for readable contrast.
+- Hid inactive model-picker endpoint and ultra-usage warning layers that were incorrectly forced visible and overlapped Reset to default.
+- Repacked the portable theme package.
+
 ## 1.1.5
 
 - Styled the settings route's outer surface with the theme palette instead of the native white shell.

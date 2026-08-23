@@ -979,6 +979,97 @@ html.codedrobe-codex-skin
   opacity: 1 !important;
 }
 
+/* Scheduled tasks uses a separate sticky search band.  Give that band the
+   same quiet lake surface as the rest of the themed shell instead of the
+   native opaque white strip, and keep its search field free of the global
+   gold focus rectangle. */
+html.codedrobe-codex-skin
+  main[class*="_MainContentSurface_"]:has(input[placeholder="Search scheduled tasks"])
+  div[class~="sticky"][class~="bg-surface"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: var(--xinjiang-ink) !important;
+}
+
+html.codedrobe-codex-skin
+  main[class*="_MainContentSurface_"]:has(input[placeholder="Search scheduled tasks"])
+  div[class~="sticky"][class~="bg-surface"]::after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+}
+
+html.codedrobe-codex-skin
+  main[class*="_MainContentSurface_"]:has(input[placeholder="Search scheduled tasks"])
+  [class*="_MainContentTopFade_"] {
+  display: none !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+html.codedrobe-codex-skin
+  main[class*="_MainContentSurface_"]:has(input[placeholder="Search scheduled tasks"])
+  :where([class*="flex h-8 items-center"]):has(input[placeholder="Search scheduled tasks"]) {
+  background: var(--xinjiang-surface) !important;
+  background-color: var(--xinjiang-surface) !important;
+  border-color: var(--xinjiang-line) !important;
+  box-shadow: none !important;
+  color: var(--xinjiang-ink) !important;
+}
+
+html.codedrobe-codex-skin
+  input[placeholder="Search scheduled tasks"]:focus,
+html.codedrobe-codex-skin
+  input[placeholder="Search scheduled tasks"]:focus-visible {
+  outline: none !important;
+  outline-offset: 0 !important;
+  box-shadow: none !important;
+}
+
+html.codedrobe-codex-skin
+  input[placeholder="Search scheduled tasks"]::placeholder {
+  color: var(--xinjiang-muted) !important;
+  opacity: 1 !important;
+}
+
+/* The scheduled-task toolbar inherits a dark native fill while its text is
+   themed ink.  Use the theme's deep teal so the action remains legible. */
+html.codedrobe-codex-skin
+  main[class*="_MainContentSurface_"]:has(input[placeholder="Search scheduled tasks"])
+  header :where(button) {
+  background: var(--xinjiang-teal) !important;
+  background-color: var(--xinjiang-teal) !important;
+  border-color: rgba(229, 247, 243, 0.28) !important;
+  color: #f4fbf9 !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html.codedrobe-codex-skin
+  main[class*="_MainContentSurface_"]:has(input[placeholder="Search scheduled tasks"])
+  header :where(button:hover, button:focus-visible) {
+  background: var(--xinjiang-gold) !important;
+  border-color: rgba(117, 71, 30, 0.30) !important;
+  color: #fffaf0 !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+/* The model picker marks inactive endpoint/warning layers with aria-hidden.
+   The broad menu readability rule above must not make those layers visible;
+   doing so places Faster/Smarter and the ultra-usage warning over Reset. */
+html.codedrobe-codex-skin
+  [class*="_ModelPickerDropdownContent_"]
+  :where(
+    [class*="_SliderEndpoints_"],
+    [class*="_UltraUsageWarning_"]
+  )[aria-hidden="true"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 /* ---------- Focus, disabled states, and modest scrollbars ---------- */
 
 html.codedrobe-codex-skin
